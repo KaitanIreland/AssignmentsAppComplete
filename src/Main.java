@@ -111,6 +111,18 @@ public class Main {
         firstCourse.courseTell();
         EnumTest secondCourse = new EnumTest(Course.FRSM);
         secondCourse.courseTell();
+
+        //Define and use a Category enumerated type
+        EnumTest firstCategory = new EnumTest(Category.HOMEWORK);
+        firstCategory.categoryTell();
+        EnumTest secondCategory = new EnumTest(Category.QUIZ);
+        secondCategory.categoryTell();
+        EnumTest thirdCategory = new EnumTest(Category.TEST);
+        thirdCategory.categoryTell();
+        EnumTest fourthCategory = new EnumTest(Category.PRESENTATION);
+        fourthCategory.categoryTell();
+        EnumTest fifthCategory = new EnumTest(Category.FINAL_EXAM);
+        fifthCategory.categoryTell();
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -221,13 +233,18 @@ public class Main {
     public enum Course {
         CPSC, ENGL, ECON, FRSM, FREN
     }
+    public enum Category {
+        HOMEWORK, QUIZ, TEST, PRESENTATION, FINAL_EXAM
+    }
     public static class EnumTest {
         Day day;
         Course course;
+        Category category;
         private EnumTest(Day day) {
             this.day = day;
         }
         private EnumTest (Course course) { this.course = course;}
+        private EnumTest (Category category) {this.category = category;}
         private void tellItLikeItIs() {
             switch (day) {
                 case MONDAY: case WEDNESDAY: case FRIDAY:
@@ -249,6 +266,26 @@ public class Main {
                 case FRSM:
                     System.out.println("FRSM offers one credit hour.");
                     break;
+            }
+        }
+        private void categoryTell() {
+            switch (category) {
+                case HOMEWORK:
+                    System.out.println("\nHomework is 20% of your grade.");
+                    break;
+                case QUIZ:
+                    System.out.println("Quizzes are 15% of your grade.");
+                    break;
+                case TEST:
+                    System.out.println("Tests are 20% of your grade.");
+                    break;
+                case PRESENTATION:
+                    System.out.println("Presentations are 20% of your grade.");
+                    break;
+                case FINAL_EXAM:
+                    System.out.println("The Final Exam is worth 25% of your grade.");
+                    break;
+
             }
         }
 }
