@@ -98,13 +98,19 @@ public class Main {
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
         //I had completely forgotten to submit the previous story, so if it looks like I completed this story incredibly quickly, it's because I temporarily removed this code so I could post the for the previous story.
 
-        //
+        //Define and use a DayOfWeek enumerated types
         EnumTest firstDay = new EnumTest(Day.MONDAY);
         firstDay.tellItLikeItIs();
         EnumTest secondDay = new EnumTest(Day.TUESDAY);
         secondDay.tellItLikeItIs();
         EnumTest sixthDay = new EnumTest(Day.SATURDAY);
         sixthDay.tellItLikeItIs();
+
+        //Define and use a Course enumerated type
+        EnumTest firstCourse = new EnumTest(Course.CPSC);
+        firstCourse.courseTell();
+        EnumTest secondCourse = new EnumTest(Course.FRSM);
+        secondCourse.courseTell();
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -213,13 +219,15 @@ public class Main {
         THURSDAY, FRIDAY, SATURDAY;
     }
     public enum Course {
-        CPSC, ENGL,
+        CPSC, ENGL, ECON, FRSM, FREN
     }
     public static class EnumTest {
         Day day;
+        Course course;
         private EnumTest(Day day) {
             this.day = day;
         }
+        private EnumTest (Course course) { this.course = course;}
         private void tellItLikeItIs() {
             switch (day) {
                 case MONDAY: case WEDNESDAY: case FRIDAY:
@@ -233,7 +241,15 @@ public class Main {
                     break;
             }
         }
-        private void coursesEnum() {
-
+        private void courseTell() {
+            switch (course) {
+                case CPSC: case FREN: case ENGL: case ECON:
+                    System.out.println("\nCPSC, FREN, ENGL, and ECON offer three credit hours.");
+                    break;
+                case FRSM:
+                    System.out.println("FRSM offers one credit hour.");
+                    break;
+            }
         }
-}}
+}
+}
