@@ -136,12 +136,26 @@ public class Main {
         System.out.println("Assignment 2: " + assign2.toString());
         System.out.println("Assignment 3: " + assign3.toString());
 
-        //TODO Override an Assignment.equals() method.
+        //Override an Assignment.equals() method.
 
-        //TODO Override an Assignment.compareTo() method then use it to output BEFORE, EQUALS, or AFTER based on the LocalDateTime.
+        //Override an Assignment.compareTo() method then use it to output BEFORE, EQUALS, or AFTER based on the LocalDateTime.
+        String before = "BEFORE";
+        String equals = "EQUALS";
+        String after = "AFTER";
+        System.out.println("\n");
+        if (assign1.compareTo(assign2) == 0) {
+            System.out.println(before);
+        }
+        if (assign1.compareTo(assign2) == 1) {
+            System.out.println(equals);
+        }
+        if (assign1.compareTo(assign2) == -1) {
+            System.out.println(after);
+        }
 
+        //Which of assign1, assign2, or assign3 is the earliest?
+        int answer = assign1.compareTo(assign2);
 
-        //TODO Which of assign1, assign2, or assign3 is the earliest?
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -255,15 +269,20 @@ public class Main {
     public enum Category {
         HOMEWORK, QUIZ, TEST, PRESENTATION, FINAL_EXAM
     }
+    public enum Timing {
+        BEFORE, EQUALS, AFTER
+    }
     public static class EnumTest {
         Day day;
         Course course;
         Category category;
+        Timing timing;
         private EnumTest(Day day) {
             this.day = day;
         }
         private EnumTest (Course course) { this.course = course;}
         private EnumTest (Category category) {this.category = category;}
+        private EnumTest (Timing timing) { this.timing = timing; }
         private void tellItLikeItIs() {
             switch (day) {
                 case MONDAY: case WEDNESDAY: case FRIDAY:
@@ -305,8 +324,16 @@ public class Main {
                     System.out.println("The Final Exam is worth 25% of your grade.");
                     break;
 
+            }}
+        private void timingTell() {
+            switch (timing) {
+                case BEFORE:
+                    System.out.println("BEFORE");
+                case EQUALS:
+                    System.out.println("EQUALS");
+                case AFTER:
+                    System.out.println("AFTER");
             }
-
 
 }
 }
@@ -372,8 +399,30 @@ public class Main {
             if (this == o) return true;
             if (!(o instanceof Assignment)) return false;
             Assignment that = (Assignment) o;
-            return (getPriority() == that.getPriority());
+            return (getPriority() == that.getPriority()) &&
+                    Objects.equals(day, that.day) &&
+                    Objects.equals(whichClass, that.whichClass) &&
+                    Objects.equals(work, that.work);
         }
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(day, whichClass, work, priority, rand);
+        }
+
+        public int compareTo(Assignment dateTime) {
+            if (getDay().compareTo(dateTime.getDay()) == 0)
+                if (getDay().isEqual(dateTime.getDay())) {
+                return 0;
+                }
+                else if (getDay().isEqual(dateTime.getDay())) {
+                return 1;
+                } else {
+                return -1;
+                }
+                return getDay().compareTo(dateTime.getDay());
+        }
+
     }
 }
 
