@@ -154,7 +154,15 @@ public class Main {
         }
 
         //Which of assign1, assign2, or assign3 is the earliest?
-        int answer = assign1.compareTo(assign2);
+        if (assign1.compareTo(assign2) == 0) {
+            System.out.println("Assignments one and three are the earliest.");
+        }
+        if (assign1.compareTo(assign2) == 1) {
+            System.out.println("All of the assignments were at the same time.");
+        }
+        if (assign1.compareTo(assign2) == -1) {
+            System.out.println("Assignment two was the earliest.");
+        }
 
     }
 
