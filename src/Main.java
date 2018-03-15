@@ -123,6 +123,22 @@ public class Main {
         fourthCategory.categoryTell();
         EnumTest fifthCategory = new EnumTest(Category.FINAL_EXAM);
         fifthCategory.categoryTell();
+
+        //TODO In the driver, generate 2 random assignments named assign1 and assign2.
+        Assignment assign1 = new Assignment(LocalDateTime.now(), new EnumTest(Course.CPSC), new EnumTest(Category.HOMEWORK), rand.nextInt(4));
+        Assignment assign2 = new Assignment();
+
+
+        //TODO Copy assign1 to assign3
+        //Assignment copy = assign1;
+        //Assignment assign3 = copy;
+
+        //TODO Override an Assignment.equals() method.
+
+        //TODO Override an Assignment.compareTo() method then use it to output BEFORE, EQUALS, or AFTER based on the LocalDateTime.
+
+
+        //TODO Which of assign1, assign2, or assign3 is the earliest?
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -287,6 +303,56 @@ public class Main {
                     break;
 
             }
+
+
+}
+}
+    public static class Assignment {
+        private LocalDateTime day;
+        private EnumTest whichClass;
+        private EnumTest work;
+        private int priority;
+        Random rand;
+
+        public Assignment() {
+            day = LocalDateTime.now();
+            whichClass = new EnumTest(Course.CPSC);
+            work = new EnumTest(Category.HOMEWORK);
+            rand = new Random();
+            priority = rand.nextInt(4);
         }
+
+        public Assignment(LocalDateTime day, EnumTest whichClass, EnumTest work, int priority) {
+            this.day = day;
+            this.whichClass = whichClass;
+            this.work = work;
+            this.priority = priority;
+        }
+        public LocalDateTime getDay() {
+            return day;
+        }
+        public void setDay(LocalDateTime day) {
+            this.day = day;
+        }
+        public EnumTest getWhichClass() {
+            return whichClass;
+        }
+        public void setWhichClass(EnumTest whichClass) {
+            this.whichClass = whichClass;
+        }
+        public EnumTest getWork() {
+            return work;
+        }
+        public void setWork(EnumTest work) {
+            this.work = work;
+        }
+        public int getPriority() {
+            return priority;
+        }
+        public void setPriority(int priority) {
+            this.priority = priority;
+        }
+
+    }
 }
-}
+
