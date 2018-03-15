@@ -367,9 +367,13 @@ public class Main {
                     '}';
         }
 
-//        public String assignmentToString() {
-//            Assignment.class.toString();
-//        }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Assignment)) return false;
+            Assignment that = (Assignment) o;
+            return (getPriority() == that.getPriority());
+        }
     }
 }
 
