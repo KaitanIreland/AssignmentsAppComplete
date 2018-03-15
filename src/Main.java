@@ -124,14 +124,17 @@ public class Main {
         EnumTest fifthCategory = new EnumTest(Category.FINAL_EXAM);
         fifthCategory.categoryTell();
 
-        //TODO In the driver, generate 2 random assignments named assign1 and assign2.
+        //In the driver, generate 2 random assignments named assign1 and assign2.
         Assignment assign1 = new Assignment(LocalDateTime.now(), new EnumTest(Course.CPSC), new EnumTest(Category.HOMEWORK), rand.nextInt(4));
         Assignment assign2 = new Assignment();
 
 
-        //TODO Copy assign1 to assign3
-        //Assignment copy = assign1;
-        //Assignment assign3 = copy;
+        //Copy assign1 to assign3
+        Assignment copy = assign1;
+        Assignment assign3 = copy;
+        System.out.println("\nAssignment 1: " + assign1.toString());
+        System.out.println("Assignment 2: " + assign2.toString());
+        System.out.println("Assignment 3: " + assign3.toString());
 
         //TODO Override an Assignment.equals() method.
 
@@ -318,8 +321,8 @@ public class Main {
             day = LocalDateTime.now();
             whichClass = new EnumTest(Course.CPSC);
             work = new EnumTest(Category.HOMEWORK);
-            rand = new Random();
-            priority = rand.nextInt(4);
+            //rand = new Random();
+            //priority = rand.nextInt(4);
         }
 
         public Assignment(LocalDateTime day, EnumTest whichClass, EnumTest work, int priority) {
@@ -353,6 +356,20 @@ public class Main {
             this.priority = priority;
         }
 
+        @Override
+        public String toString() {
+            return "Assignment{" +
+                    "day=" + day +
+                    ", whichClass=" + whichClass +
+                    ", work=" + work +
+                    ", priority=" + priority +
+                    ", rand=" + rand +
+                    '}';
+        }
+
+//        public String assignmentToString() {
+//            Assignment.class.toString();
+//        }
     }
 }
 
