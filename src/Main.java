@@ -164,6 +164,9 @@ public class Main {
             System.out.println("Assignment two was the earliest.");
         }
 
+        //Write [X] randomly generated assignments into the file 'input.dat'
+
+
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -429,6 +432,17 @@ public class Main {
                 return -1;
                 }
                 return getDay().compareTo(dateTime.getDay());
+        }
+
+        public Assignment generateRandomAssignment(Assignment random) {
+            Random rand = new Random();
+            ArrayList<Course> coursesRand = new ArrayList<>();
+            coursesRand.add(CPSC);
+            coursesRand.add(CPSC);
+            ArrayList<Category> categoriesRand = new ArrayList<>();
+            day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
+            whichClass = new EnumTest(Course.CPSC);
+            work = new EnumTest(Category.HOMEWORK);
         }
 
     }
