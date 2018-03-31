@@ -1,4 +1,7 @@
 import javax.swing.text.DateFormatter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -164,7 +167,66 @@ public class Main {
             System.out.println("Assignment two was the earliest.");
         }
 
-        //Write [X] randomly generated assignments into the file 'input.dat'
+        //TODO Write [X] randomly generated assignments into the file 'input.dat'
+        Scanner sc = new Scanner(System.in);
+        System.out.println("How many random assignments would you like to generate?");
+        int numRandomAssignments = sc.nextInt();
+        Assignment random = new Assignment();
+        Assignment fixedRandom = generateRandomAssignment;
+
+        for (int i = 0; i < numRandomAssignments; i++) {
+            File outfile = new File( "input.dat" );
+            if( outfile.exists() ) {
+                System.out.println( "Oh no, you're going to overwrite the data in the file!" );
+            } else {
+                try( PrintWriter pw = new PrintWriter( outfile ) ) {
+                    System.out.println( "This is being written to stdout." );
+                    pw.println(random);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+        //TODO Read assignments from the file 'input.dat' and store them in an Assignment object.
+        File infile = new File( "input.dat" );
+        if( ! infile.exists() ) {
+            System.out.println( "Oh no, you can't read from a file that doesn't exist!" );
+        } else {
+            try( Scanner sc2 = new Scanner(infile) ) {
+                while( sc2.hasNext() ) {
+                    String name = sc2.next();
+                    int age = sc2.nextInt();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //TODO Remove any duplicate assignments.
+        //Set
+
+        //TODO Count the number of assignments for course [C].
+
+        //TODO Sort the assignments in reverse chronological order.
+
+        //TODO Sort the assignments by increasing priority order.
+
+        //TODO Sort the assignments by Course.
+
+        //TODO Which assignments are due today?
+
+        //TODO Which assignments will be due within [X] days?
+        System.out.println("How many days do you want to look ahead?");
+        int daysAhead = sc.nextInt();
+
+        //TODO Which assignments are past due, sorted by course?
+
+        //TODO What is the next assignment due for each course?
+
+        //TODO What are the highest priority assignments that are still due, sorted by date?
 
 
     }
@@ -436,13 +498,10 @@ public class Main {
 
         public Assignment generateRandomAssignment(Assignment random) {
             Random rand = new Random();
-            ArrayList<Course> coursesRand = new ArrayList<>();
-            coursesRand.add(CPSC);
-            coursesRand.add(CPSC);
-            ArrayList<Category> categoriesRand = new ArrayList<>();
-            day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
-            whichClass = new EnumTest(Course.CPSC);
-            work = new EnumTest(Category.HOMEWORK);
+            this.day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
+            this.priority = rand.nextInt(4);
+
+            return random;
         }
 
     }
