@@ -167,21 +167,12 @@ public class Main {
             System.out.println("Assignment two was the earliest.");
         }
 
-        //TODO Write [X] randomly generated assignments into the file 'input.dat'
+        //Write [X] randomly generated assignments into the file 'input.dat'
         Scanner sc = new Scanner(System.in);
         System.out.println("How many random assignments would you like to generate?");
         int numRandomAssignments = sc.nextInt();
-            File outfile = new File( "input.dat" );
-                try( PrintWriter pw = new PrintWriter( outfile ) ) {
-                    System.out.println( numRandomAssignments + " random assignments have been generated and written to the file." );
-                    for (int j = 0; j < numRandomAssignments; j++) {
-                        pw.println(LocalDateTime.now().minusSeconds(rand.nextInt(100000)));
-                        pw.println(rand.nextInt(4));
-                    }
-                }
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+        File input = writeRandomAssignmentToFile(numRandomAssignments);
+
 
 
         //TODO Read assignments from the file 'input.dat' and store them in an Assignment object.
@@ -222,6 +213,22 @@ public class Main {
 
 
     }
+
+    private static File writeRandomAssignmentToFile(int numRandomAssignments) {
+        Random rand = new Random();
+        File outfile = new File("input.dat");
+        try (PrintWriter pw = new PrintWriter(outfile)) {
+            System.out.println(numRandomAssignments + " random assignments have been generated and written to the file.");
+            for (int j = 0; j < numRandomAssignments; j++) {
+                pw.println(LocalDateTime.now().minusSeconds(rand.nextInt(100000)));
+                pw.println(rand.nextInt(4));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return outfile;
+    }
+
 
     private static String formattedDate(LocalDateTime date) {
         String newDate = "";
@@ -423,27 +430,35 @@ public class Main {
             this.work = work;
             this.priority = priority;
         }
+
         public LocalDateTime getDay() {
             return day;
         }
+
         public void setDay(LocalDateTime day) {
             this.day = day;
         }
+
         public EnumTest getWhichClass() {
             return whichClass;
         }
+
         public void setWhichClass(EnumTest whichClass) {
             this.whichClass = whichClass;
         }
+
         public EnumTest getWork() {
             return work;
         }
+
         public void setWork(EnumTest work) {
             this.work = work;
         }
+
         public int getPriority() {
             return priority;
         }
+
         public void setPriority(int priority) {
             this.priority = priority;
         }
@@ -469,6 +484,7 @@ public class Main {
                     Objects.equals(whichClass, that.whichClass) &&
                     Objects.equals(work, that.work);
         }
+
         @Override
         public int hashCode() {
 
@@ -478,25 +494,15 @@ public class Main {
         public int compareTo(Assignment dateTime) {
             if (getDay().compareTo(dateTime.getDay()) == 0)
                 if (getDay().isEqual(dateTime.getDay())) {
-                return 0;
-                }
-                else if (getDay().isEqual(dateTime.getDay())) {
-                return 1;
+                    return 0;
+                } else if (getDay().isEqual(dateTime.getDay())) {
+                    return 1;
                 } else {
-                return -1;
+                    return -1;
                 }
-                return getDay().compareTo(dateTime.getDay());
+            return getDay().compareTo(dateTime.getDay());
         }
 
-//        public ArrayList<Assignment> generateRandomAssignments() {
-//            Random rand = new Random();
-//            ArrayList<Assignment> randomAssignments = new ArrayList<>();
-//            day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
-//            priority = rand.nextInt(4);
-//
-//
-//        }
 
-    }
-}
+    }}
 
