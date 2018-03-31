@@ -176,17 +176,7 @@ public class Main {
 
 
         //TODO Read assignments from the file 'input.dat' and store them in an Assignment object.
-        File infile = new File( "input.dat" );
-        if( ! infile.exists() ) {
-            System.out.println( "Oh no, you can't read from a file that doesn't exist!" );
-        } else {
-            try( Scanner sc2 = new Scanner(infile) ) {
-                while( sc2.hasNext() ) {
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        File output = readRandomAssignmentFromFile();
 
         //TODO Remove any duplicate assignments.
         //Set
@@ -214,21 +204,39 @@ public class Main {
 
     }
 
+
+
     private static File writeRandomAssignmentToFile(int numRandomAssignments) {
         Random rand = new Random();
         File outfile = new File("input.dat");
         try (PrintWriter pw = new PrintWriter(outfile)) {
             System.out.println(numRandomAssignments + " random assignments have been generated and written to the file.");
             for (int j = 0; j < numRandomAssignments; j++) {
-                pw.println(LocalDateTime.now().minusSeconds(rand.nextInt(100000)));
-                pw.println(rand.nextInt(4));
+                pw.print(LocalDateTime.now().minusSeconds(rand.nextInt(100000)));
+                pw.print(" ");
+                pw.print(rand.nextInt(4));
+                pw.print("\n");
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return outfile;
     }
-
+    private static Assignment readRandomAssignmentFromFile(Assignment randomAssignments) {
+        File infile = new File( "input.dat" );
+        if( ! infile.exists() ) {
+            System.out.println( "Oh no, you can't read from a file that doesn't exist!" );
+        } else {
+            try( Scanner sc2 = new Scanner( infile ) ) {
+                while( sc2.hasNextLong() ) {
+                    LocalDateTime randomLDT = sc2.next();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private static String formattedDate(LocalDateTime date) {
         String newDate = "";
