@@ -171,23 +171,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("How many random assignments would you like to generate?");
         int numRandomAssignments = sc.nextInt();
-        Assignment random = new Assignment();
-        Assignment fixedRandom = generateRandomAssignment;
-
-        for (int i = 0; i < numRandomAssignments; i++) {
             File outfile = new File( "input.dat" );
-            if( outfile.exists() ) {
-                System.out.println( "Oh no, you're going to overwrite the data in the file!" );
-            } else {
                 try( PrintWriter pw = new PrintWriter( outfile ) ) {
-                    System.out.println( "This is being written to stdout." );
-                    pw.println(random);
-                } catch (FileNotFoundException e) {
+                    System.out.println( numRandomAssignments + " random assignments have been generated and written to the file." );
+                    for (int j = 0; j < numRandomAssignments; j++) {
+                        pw.println(LocalDateTime.now().minusSeconds(rand.nextInt(100000)));
+                        pw.println(rand.nextInt(4));
+                    }
+                }
+                catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-            }
-
-        }
 
 
         //TODO Read assignments from the file 'input.dat' and store them in an Assignment object.
@@ -197,8 +191,6 @@ public class Main {
         } else {
             try( Scanner sc2 = new Scanner(infile) ) {
                 while( sc2.hasNext() ) {
-                    String name = sc2.next();
-                    int age = sc2.nextInt();
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -496,13 +488,14 @@ public class Main {
                 return getDay().compareTo(dateTime.getDay());
         }
 
-        public Assignment generateRandomAssignment(Assignment random) {
-            Random rand = new Random();
-            this.day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
-            this.priority = rand.nextInt(4);
-
-            return random;
-        }
+//        public ArrayList<Assignment> generateRandomAssignments() {
+//            Random rand = new Random();
+//            ArrayList<Assignment> randomAssignments = new ArrayList<>();
+//            day = LocalDateTime.now().minusSeconds(rand.nextInt(100000));
+//            priority = rand.nextInt(4);
+//
+//
+//        }
 
     }
 }
